@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🌎 Tierra Interactiva</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-image: url("fondo.jpg");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+
+            color: white;
+            font-family: Arial, sans-serif;
+
+            min-height: 100vh;
+
+            overflow-x: hidden;
+            overflow-y: auto;
+
+            position: relative;
+        }
+
+
+        /* CAPA OSCURA PARA DARLE MEJOR CONTRASTE AL FONDO */
+
+        body::before {
+            content: "";
+
+            position: fixed;
+            inset: 0;
+
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(0, 80, 130, .08),
+                    rgba(0, 0, 0, .55)
+                );
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        /* ENCABEZADO */
+
+        header {
+            text-align: center;
+            padding: 25px 15px 5px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        h1 {
+            font-size: clamp(28px, 4vw, 45px);
+
+            letter-spacing: 2px;
+
+            text-shadow:
+                0 0 10px rgba(125, 220, 255, .8),
+                0 0 25px rgba(22, 139, 208, .7);
+        }
+
+        .subtitulo {
+            margin-top: 12px;
+
+            color: #d7f3ff;
+
+            font-size: clamp(14px, 2vw, 18px);
+
+            line-height: 1.5;
+
+            text-shadow: 0 2px 5px black;
+        }
+
+        .instruccion {
+            display: inline-block;
+
+            margin-top: 14px;
+            padding: 8px 18px;
+
+            border: 1px solid rgba(125, 220, 255, .5);
+            border-radius: 30px;
+
+            background: rgba(5, 35, 55, .55);
+
+            color: #9ee8ff;
+
+            font-size: 13px;
+
+            box-shadow:
+                0 0 15px rgba(22, 139, 208, .25);
+        }
+
+        /* ZONA DEL PLANETA */
+
+        .escenario {
+            position: relative;
+
+            width: 100%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 10px 15px 40px;
+        }
+
+        .planeta {
+            position: relative;
+
+            width: min(550px, 92vw);
+            height: min(550px, 92vw);
+
+            margin: 20px auto 0;
+
+            border-radius: 50%;
+
+            background: transparent;
+        }
+
+        /* IMAGEN DE LA TIERRA */
+
+        .tierra {
+            position: absolute;
+
+            width: 100%;
+            height: 100%;
+
+            object-fit: contain;
+
+            top: 0;
+            left: 0;
+
+            z-index: 0;
+
+            pointer-events: none;
+
+        }
+
+        /* PROBLEMÁTICAS AMBIENTALES */
+
+        .problema {
+            position: absolute;
+
+            width: 82px;
+            height: 82px;
+
+            object-fit: cover;
+
+            border-radius: 50%;
+
+            cursor: pointer;
+
+            border: 3px solid white;
+
+            background: #09283c;
+
+            z-index: 5;
+
+            box-shadow:
+                0 0 8px white,
+                0 0 18px rgba(255, 170, 50, .8),
+                0 0 35px rgba(255, 170, 50, .35);
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease,
+                border-color .3s ease;
+
+            animation: pulso 2.5s infinite;
+        }
+
+        .problema:hover {
+            transform: scale(1.22);
+
+            border-color: #8ceaff;
+
+            box-shadow:
+                0 0 12px white,
+                0 0 25px #65dfff,
+                0 0 45px rgba(22, 139, 208, .9);
+        }
+
+        .problema:focus {
+            outline: 3px solid #8ceaff;
+            outline-offset: 5px;
+        }
+
+        /* ETIQUETAS DE CADA PROBLEMÁTICA */
+
+        .etiqueta {
+            position: absolute;
+
+            z-index: 6;
+
+            padding: 7px 12px;
+
+            border-radius: 20px;
+
+            background: rgba(3, 24, 38, .88);
+
+            border: 1px solid rgba(125, 220, 255, .65);
+
+            color: white;
+
+            font-size: 13px;
+            font-weight: bold;
+
+            white-space: nowrap;
+
+            pointer-events: none;
+
+            box-shadow:
+                0 0 12px rgba(22, 139, 208, .35);
+        }
+
+        .etiqueta::before {
+            content: "";
+
+            position: absolute;
+
+            width: 7px;
+            height: 7px;
+
+            background: #7ddcff;
+
+            border-radius: 50%;
+
+            left: -5px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            box-shadow: 0 0 10px #7ddcff;
+        }
+
+        /* POSICIONES */
+
+        .sobrepoblacion {
+            top: 8%;
+            left: 8%;
+        }
+
+        .deforestacion {
+            top: 54%;
+            left: 5%;
+        }
+
+        .biodiversidad {
+            top: 18%;
+            right: 5%;
+        }
+
+        .contaminacion {
+            top: 66%;
+            right: 8%;
+        }
+
+        .etiqueta-sobrepoblacion {
+            top: 5%;
+            left: 24%;
+        }
+
+        .etiqueta-deforestacion {
+            top: 68%;
+            left: 0;
+        }
+
+        .etiqueta-biodiversidad {
+            top: 12%;
+            right: 8%;
+        }
+
+        .etiqueta-contaminacion {
+            top: 82%;
+            right: 0;
+        }
+
+        /* VENTANA DE INFORMACIÓN */
+
+        .ventana {
+            display: none;
+
+            position: fixed;
+
+            top: 50%;
+            left: 50%;
+
+            transform: translate(-50%, -50%);
+
+            width: 720px;
+            max-width: 92%;
+
+            max-height: 85vh;
+            overflow-y: auto;
+
+            padding: 35px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(7, 34, 52, .98),
+                    rgba(3, 17, 29, .98)
+                );
+
+            color: white;
+
+            border-radius: 25px;
+
+            border: 2px solid rgba(125, 220, 255, .7);
+
+            box-shadow:
+                0 0 25px rgba(22, 139, 208, .7),
+                0 0 80px rgba(0, 0, 0, .9);
+
+            z-index: 20;
+
+            animation: aparecer .3s ease;
+        }
+
+        .ventana h2 {
+            font-size: clamp(23px, 4vw, 32px);
+
+            margin-bottom: 20px;
+
+            color: #8ceaff;
+
+            text-shadow:
+                0 0 12px rgba(125, 220, 255, .6);
+        }
+
+        .ventana p {
+            min-height: 80px;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            color: #e4f5ff;
+        }
+
+        .espacio-informacion {
+            padding: 20px;
+
+            border: 1px dashed rgba(125, 220, 255, .5);
+
+            border-radius: 15px;
+
+            color: #a7cbdc;
+
+            text-align: center;
+        }
+
+        /* BOTÓN CERRAR */
+
+        .cerrar {
+            margin-top: 25px;
+
+            padding: 12px 26px;
+
+            border: none;
+
+            border-radius: 12px;
+
+            background: linear-gradient(
+                135deg,
+                #168bd0,
+                #07527f
+            );
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            transition:
+                transform .3s ease,
+                box-shadow .3s ease;
+        }
+
+        .cerrar:hover {
+            transform: scale(1.06);
+
+            box-shadow:
+                0 0 18px rgba(125, 220, 255, .8);
+        }
+
+        /* FONDO OSCURO AL ABRIR LA VENTANA */
+
+        .fondo-ventana {
+            display: none;
+
+            position: fixed;
+            inset: 0;
+
+            background: rgba(0, 8, 15, .72);
+
+            backdrop-filter: blur(5px);
+
+            z-index: 15;
+        }
+
+        /* ANIMACIONES */
+
+        @keyframes pulso {
+
+            0%, 100% {
+                box-shadow:
+                    0 0 8px white,
+                    0 0 18px rgba(255, 170, 50, .8),
+                    0 0 35px rgba(255, 170, 50, .35);
+            }
+
+            50% {
+                box-shadow:
+                    0 0 12px white,
+                    0 0 25px rgba(125, 220, 255, .9),
+                    0 0 42px rgba(22, 139, 208, .6);
+            }
+
+        }
+
+        @keyframes aparecer {
+
+            from {
+                opacity: 0;
+
+                transform:
+                    translate(-50%, -45%)
+                    scale(.9);
+            }
+
+            to {
+                opacity: 1;
+
+                transform:
+                    translate(-50%, -50%)
+                    scale(1);
+            }
+
+        }
+
+        /* TABLETS Y CELULARES */
+
+        @media (max-width: 700px) {
+
+            header {
+                padding-top: 18px;
+            }
+
+            .escenario {
+                padding-top: 5px;
+            }
+
+            .planeta {
+                width: 94vw;
+                height: 94vw;
+            }
+
+            .problema {
+                width: 58px;
+                height: 58px;
+
+                border-width: 2px;
+            }
+
+            .etiqueta {
+                display: none;
+            }
+
+            .sobrepoblacion {
+                top: 8%;
+                left: 8%;
+            }
+
+            .deforestacion {
+                top: 55%;
+                left: 3%;
+            }
+
+            .biodiversidad {
+                top: 18%;
+                right: 3%;
+            }
+
+            .contaminacion {
+                top: 67%;
+                right: 5%;
+            }
+
+            .ventana {
+                padding: 24px;
+
+                max-height: 88vh;
+            }
+
+            .ventana p {
+                font-size: 16px;
+            }
+
+        }
+
+        @media (max-width: 400px) {
+
+            .problema {
+                width: 50px;
+                height: 50px;
+            }
+
+            .subtitulo {
+                font-size: 13px;
+            }
+
+            .instruccion {
+                font-size: 11px;
+            }
+
+            .ventana {
+                padding: 20px;
+            }
+
+        }
+
+        /* RESPETO A USUARIOS QUE PREFIEREN MENOS ANIMACIONES */
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+
+        }
+
+        .seccion-info {
+    margin-top: 20px;
+    padding: 18px;
+
+    background: rgba(10, 52, 75, .55);
+
+    border-left: 4px solid #7ddcff;
+
+    border-radius: 12px;
+}
+
+.seccion-info h3 {
+    margin-bottom: 10px;
+
+    color: #7ddcff;
+
+    font-size: 21px;
+}
+
+.seccion-info p {
+    min-height: auto;
+
+    color: #e4f5ff;
+
+    font-size: 16px;
+
+    line-height: 1.7;
+}
+
+.seccion-info ul {
+    padding-left: 25px;
+
+    color: #e4f5ff;
+
+    font-size: 16px;
+
+    line-height: 1.8;
+}
+
+.seccion-info li {
+    margin-bottom: 8px;
+}
+
+.seccion-info li::marker {
+    color: #7ddcff;
+}
+
+.ambiente {
+    position: fixed;
+    inset: 0;
+
+    overflow: hidden;
+
+    pointer-events: none;
+
+    z-index: 1;
+}
+
+.ambiente span {
+    position: absolute;
+
+    width: 4px;
+    height: 4px;
+
+    border-radius: 50%;
+
+    background: white;
+
+    box-shadow: 0 0 10px #7ddcff;
+
+    animation: flotar 14s linear infinite;
+}
+
+@keyframes flotar {
+
+    0% {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: .8;
+    }
+
+    50% {
+        transform: translateY(-150px) translateX(30px);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-500px) translateX(-20px);
+        opacity: 0;
+    }
+
+}
+
+    </style>
+</head>
+
+<body>
+
+    <header>
+
+        <h1>🌎 Tierra Interactiva</h1>
+
+        <p class="subtitulo">
+            Explora las principales problemáticas ambientales que afectan a nuestro planeta.
+        </p>
+
+        <div class="instruccion">
+            ✦ Selecciona una imagen para descubrir más ✦
+        </div>
+
+    </header>
+
+
+    <!-- PLANETA Y PROBLEMÁTICAS -->
+
+    <main class="escenario">
+
+        <div class="planeta">
+
+            <img
+                src="tierra.png"
+                class="tierra"
+                alt="Planeta Tierra"
+            >
+
+
+            <!-- SOBREPOBLACIÓN -->
+
+            <img
+                src="sobrepoblacion.jpg"
+                class="problema sobrepoblacion"
+                alt="Sobrepoblación"
+                title="Sobrepoblación"
+                tabindex="0"
+                role="button"
+                onclick="mostrarInfo('sobrepoblacion')"
+                onkeydown="activarTecla(event, 'sobrepoblacion')"
+            >
+
+            <div class="etiqueta etiqueta-sobrepoblacion">
+                Sobrepoblación
+            </div>
+
+
+            <!-- DEFORESTACIÓN -->
+
+            <img
+                src="deforestacion.jpg"
+                class="problema deforestacion"
+                alt="Deforestación"
+                title="Deforestación"
+                tabindex="0"
+                role="button"
+                onclick="mostrarInfo('deforestacion')"
+                onkeydown="activarTecla(event, 'deforestacion')"
+            >
+
+            <div class="etiqueta etiqueta-deforestacion">
+                Deforestación
+            </div>
+
+
+            <!-- PÉRDIDA DE LA BIODIVERSIDAD -->
+
+            <img
+                src="biodiversidad.jpg"
+                class="problema biodiversidad"
+                alt="Pérdida de la biodiversidad"
+                title="Pérdida de la biodiversidad"
+                tabindex="0"
+                role="button"
+                onclick="mostrarInfo('biodiversidad')"
+                onkeydown="activarTecla(event, 'biodiversidad')"
+            >
+
+            <div class="etiqueta etiqueta-biodiversidad">
+                Pérdida de biodiversidad
+            </div>
+
+
+            <!-- CONTAMINACIÓN -->
+
+            <img
+                src="contaminacion.jpg"
+                class="problema contaminacion"
+                alt="Contaminación"
+                title="Contaminación"
+                tabindex="0"
+                role="button"
+                onclick="mostrarInfo('contaminacion')"
+                onkeydown="activarTecla(event, 'contaminacion')"
+            >
+
+            <div class="etiqueta etiqueta-contaminacion">
+                Contaminación
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- FONDO OSCURO DE LA VENTANA -->
+
+    <div
+        class="fondo-ventana"
+        id="fondoVentana"
+        onclick="cerrarInfo()"
+    ></div>
+
+
+    <!-- VENTANA DE INFORMACIÓN -->
+
+    <div
+        class="ventana"
+        id="ventana"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="titulo"
+    >
+<h2 id="titulo"></h2>
+
+<section class="seccion-info">
+    <h3>¿Qué es?</h3>
+
+    <p id="queEs">
+        Aquí colocarás la definición de esta problemática.
+    </p>
+</section>
+
+<section class="seccion-info">
+    <h3>¿Qué ocurre?</h3>
+
+    <p id="informacion">
+        Aquí colocarás la explicación de esta problemática.
+    </p>
+</section>
+
+<section class="seccion-info">
+
+    <h3>Consecuencias</h3>
+
+    <ul id="consecuencias"></ul>
+
+</section>
+
+        <button
+            class="cerrar"
+            onclick="cerrarInfo()"
+        >
+            Cerrar
+        </button>
+
+    </div>
+
+
+    <!-- JAVASCRIPT -->
+
+    <script>
+
+    const ambiente = document.createElement("div");
+    ambiente.className = "ambiente";
+    document.body.appendChild(ambiente);
+
+    for (let i = 0; i < 20; i++) {
+
+        const particula = document.createElement("span");
+
+        particula.style.left = Math.random() * 100 + "%";
+        particula.style.top = (60 + Math.random() * 40) + "%";
+        particula.style.animationDelay = Math.random() * 10 + "s";
+        particula.style.animationDuration = (10 + Math.random() * 10) + "s";
+
+        ambiente.appendChild(particula);
+    }
+
+
+   function mostrarInfo(problema) {
+
+    let titulo = "";
+    let queEs = "";
+    let informacion = "";
+    let consecuencias = [];
+
+    if (problema === "sobrepoblacion") {
+
+        titulo = "👥 Sobrepoblación";
+
+        queEs = "Aquí escribirás qué es la sobrepoblación.";
+
+        informacion = "Aquí escribirás qué ocurre con la sobrepoblación.";
+
+        consecuencias = [
+            "Aquí colocarás la primera consecuencia.",
+            "Aquí colocarás la segunda consecuencia.",
+            "Aquí colocarás la tercera consecuencia."
+        ];
+    }
+
+    if (problema === "deforestacion") {
+
+        titulo = "🌳 Deforestación";
+
+        queEs = "Aquí escribirás qué es la deforestación.";
+
+        informacion = "Aquí escribirás qué ocurre con la deforestación.";
+
+        consecuencias = [
+            "Aquí colocarás la primera consecuencia.",
+            "Aquí colocarás la segunda consecuencia.",
+            "Aquí colocarás la tercera consecuencia."
+        ];
+    }
+
+    if (problema === "biodiversidad") {
+
+        titulo = "🦋 Pérdida de la biodiversidad";
+
+        queEs = "Aquí escribirás qué es la pérdida de la biodiversidad.";
+
+        informacion = "Aquí escribirás qué ocurre con la pérdida de la biodiversidad.";
+
+        consecuencias = [
+            "Aquí colocarás la primera consecuencia.",
+            "Aquí colocarás la segunda consecuencia.",
+            "Aquí colocarás la tercera consecuencia."
+        ];
+    }
+
+    if (problema === "contaminacion") {
+
+        titulo = "🏭 Contaminación";
+
+        queEs = "Aquí escribirás qué es la contaminación.";
+
+        informacion = "Aquí escribirás qué ocurre con la contaminación.";
+
+        consecuencias = [
+            "Aquí colocarás la primera consecuencia.",
+            "Aquí colocarás la segunda consecuencia.",
+            "Aquí colocarás la tercera consecuencia."
+        ];
+    }
+
+    document.getElementById("titulo").textContent = titulo;
+
+    document.getElementById("queEs").textContent = queEs;
+
+    document.getElementById("informacion").textContent = informacion;
+
+    let listaConsecuencias = document.getElementById("consecuencias");
+
+    listaConsecuencias.innerHTML = "";
+
+    consecuencias.forEach(function(consecuencia) {
+
+        let elemento = document.createElement("li");
+
+        elemento.textContent = consecuencia;
+
+        listaConsecuencias.appendChild(elemento);
+
+    });
+
+    document.getElementById("ventana").style.display = "block";
+
+    document.getElementById("fondoVentana").style.display = "block";
+
+    document.body.style.overflow = "hidden";
+}
+
+
+
+        function cerrarInfo() {
+
+            document.getElementById("ventana").style.display = "none";
+
+            document.getElementById("fondoVentana").style.display = "none";
+
+            document.body.style.overflow = "auto";
+        }
+
+
+        function activarTecla(event, problema) {
+
+            if (event.key === "Enter" || event.key === " ") {
+
+                event.preventDefault();
+
+                mostrarInfo(problema);
+            }
+
+        }
+
+
+        document.addEventListener("keydown", function(event) {
+
+            if (event.key === "Escape") {
+                cerrarInfo();
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
