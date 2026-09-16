@@ -83,6 +83,10 @@
             line-height: 1.5;
 
             text-shadow: 0 2px 5px black;
+
+            position:relative;
+
+            top:50px;
         }
 
         .instruccion {
@@ -102,6 +106,10 @@
 
             box-shadow:
                 0 0 15px rgba(22, 139, 208, .25);
+
+                position: relative;
+
+                top:50px;
         }
 
         /* ZONA DEL PLANETA */
@@ -250,42 +258,42 @@
         /* POSICIONES */
 
         .sobrepoblacion {
-            top: 8%;
-            left: 8%;
+            top:20%;
+            left:25%
         }
 
         .deforestacion {
-            top: 54%;
-            left: 5%;
+            top: 60%;
+            left: 25%;
         }
 
         .biodiversidad {
-            top: 18%;
-            right: 5%;
+            top: 25%;
+            right: 25%;
         }
 
         .contaminacion {
-            top: 66%;
-            right: 8%;
+            top: 54%;
+            right: 22%;
         }
 
         .etiqueta-sobrepoblacion {
-            top: 5%;
-            left: 24%;
+            top: 14%;
+            left: 22%;
         }
 
         .etiqueta-deforestacion {
-            top: 68%;
-            left: 0;
+            top: 75%;
+            left: 22%;
         }
 
         .etiqueta-biodiversidad {
-            top: 12%;
-            right: 8%;
+            top: 30%;
+            left:75%;
         }
 
         .etiqueta-contaminacion {
-            top: 82%;
+            top: 58%;
             right: 0;
         }
 
@@ -1779,6 +1787,10 @@
 
 }
 
+ h1{
+    transform: translate(0px,50px);
+}
+
 
 
     </style>
@@ -1795,7 +1807,7 @@
         </p>
 
         <div class="instruccion">
-            ✦ Selecciona una imagen para descubrir más ✦
+             ♦ Selecciona una imagen para ver la problematica ♦ 
         </div>
 
     </header>
@@ -1816,7 +1828,7 @@
     🛰️
 
     <span class="indicador-satelite">
-        ✦ Explorar
+        ✦Historia de la Humanidad y el medio ambiente
     </span>
 </div>
 
@@ -1834,21 +1846,25 @@
 
         <!-- ✏️ AQUÍ VA EL TÍTULO -->
         <h2 id="tituloSatelite">
-            AQUÍ VA EL TÍTULO
+            Deterioro del medio ambiente a traves de la historia
         </h2>
 
         <!-- 🖼️ AQUÍ VA LA IMAGEN -->
         <div class="imagen-holograma">
             <img
                 id="imagenSatelite"
-                src=""
-                alt=""
+                src="satelite.jpg"
+                alt="imagen del satelite"
             >
         </div>
 
         <!-- 📝 AQUÍ VA LA INFORMACIÓN -->
         <p id="textoSatelite">
-            AQUÍ VA LA INFORMACIÓN
+            El ser humano comenzó a dañar el medio ambiente desde el descubrimiento del fuego
+             y la creación de asentamientos. Con el avance tecnológico, aumentó la contaminación,
+              especialmente con el uso del carbón y el petróleo como fuentes de energía,
+               provocando un impacto ambiental creciente en todo el mundo.
+
         </p>
 
         <button
@@ -1880,7 +1896,7 @@
     </span>
 
     <span class="indicador-cometa">
-        ✦ Explorar trayectoria
+        ✦ Explora la Conclusion
     </span>
 
 </div>
@@ -1897,7 +1913,7 @@
 
         <!-- ✏️ AQUÍ VA EL TÍTULO -->
         <h2 id="tituloCometa">
-            AQUÍ VA EL TÍTULO
+            Conclusion
         </h2>
 
         <!-- 🖼️ AQUÍ VA LA IMAGEN -->
@@ -1905,15 +1921,17 @@
 
             <img
                 id="imagenCometa"
-                src=""
-                alt=""
+                src="conclusion.jpg"
+                alt="imagen de la conclusion"
             >
 
         </div>
 
         <!-- 📝 AQUÍ VA LA INFORMACIÓN -->
         <p id="textoCometa">
-            AQUÍ VA LA INFORMACIÓN
+            A lo largo de la historia, las actividades humanas han generado un impacto cada vez mayor en el medio ambiente.
+             El crecimiento de la población, la explotación de recursos y el desarrollo industrial han provocado contaminación, 
+             deforestación y pérdida de biodiversidad.
         </p>
 
         <button
@@ -2102,14 +2120,14 @@
 
         titulo = "👥 Sobrepoblación";
 
-        queEs = "Aquí escribirás qué es la sobrepoblación.";
+        queEs = "Es el aumento de la poblacion humana y como consecuencia de los progresos en Tecnologia,Medicina e Higiene que presenta la humanidad.";
 
-        informacion = "Aquí escribirás qué ocurre con la sobrepoblación.";
+        informacion = "Existe un gran  numero de habitantes en un lugar el cual supera la capacidad de los recursos disponibles y del entorno para sostenerlos. ";
 
         consecuencias = [
-            "Aquí colocarás la primera consecuencia.",
-            "Aquí colocarás la segunda consecuencia.",
-            "Aquí colocarás la tercera consecuencia."
+            "Escasez de alimentos y hambre en algunos paises.",
+            "Agotamiento de recursos y Desigualdad social.",
+            "Urbanizacion descontrolada y creacion de megaciudades."
         ];
     }
 
@@ -2117,14 +2135,15 @@
 
         titulo = "🌳 Deforestación";
 
-        queEs = "Aquí escribirás qué es la deforestación.";
+        queEs = "Es la desaparicion de los arboles y su vegetacion asociada a un determinado sistema ecosistema.";
 
-        informacion = "Aquí escribirás qué ocurre con la deforestación.";
+        informacion = "La tala excesiva y la rapida extension de la urbanizacion son factores que llevan a grandes deforestaciones que destruyen extensas regiones de ecosistemas.";
 
         consecuencias = [
-            "Aquí colocarás la primera consecuencia.",
-            "Aquí colocarás la segunda consecuencia.",
-            "Aquí colocarás la tercera consecuencia."
+            "Produce erosion y perdida del suelo fertil.",
+            "Cambio en condiciones climaticas y aumento del efecto invernadero.",
+            "Menor captacion de CO2.",
+            "Perdida de la biodiversidad y de recursos biologicos."
         ];
     }
 
@@ -2132,14 +2151,14 @@
 
         titulo = "🦋 Pérdida de la biodiversidad";
 
-        queEs = "Aquí escribirás qué es la pérdida de la biodiversidad.";
+        queEs = "Es el grado de variedad de especies en los ecosistemas que ha surgido como consecuencia de la evolucion biologica.";
 
-        informacion = "Aquí escribirás qué ocurre con la pérdida de la biodiversidad.";
+        informacion = "La reduccion,diminucion o desaparicion de la gran variedad de seres vivos que habitan en el planeta,incluyendo plantas,animales y hongos.";
 
         consecuencias = [
-            "Aquí colocarás la primera consecuencia.",
-            "Aquí colocarás la segunda consecuencia.",
-            "Aquí colocarás la tercera consecuencia."
+            "Sobreexplotacion de los recursos biologicos.",
+            "La introduccion de especies foraneas  que desplazan a las autoctonas.",
+            "La caza o pesca abusiva e ilegal."
         ];
     }
 
@@ -2147,14 +2166,14 @@
 
         titulo = "🏭 Contaminación";
 
-        queEs = "Aquí escribirás qué es la contaminación.";
+        queEs = "Es la acumulacion de sustancias NO naturales en grandes concentraciones en el agua,el suelo y el aire.";
 
-        informacion = "Aquí escribirás qué ocurre con la contaminación.";
+        informacion = "La industrializacion y materiales toxicos o no biodegradables terminan entrando en grandes cantidades a los ecosistemas y estos desechos dañan a los seres que habitan en la zona.";
 
         consecuencias = [
-            "Aquí colocarás la primera consecuencia.",
-            "Aquí colocarás la segunda consecuencia.",
-            "Aquí colocarás la tercera consecuencia."
+            "Muerte de especies y perdida de biodiversidad.",
+            "Acumulacion de sustancias toxicas y deterioro del medio natural.",
+            "Aparicion de enfermedades y alteraciones geneticas en los organismos."
         ];
     }
 
