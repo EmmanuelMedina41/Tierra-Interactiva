@@ -1791,6 +1791,281 @@
     transform: translate(0px,50px);
 }
 
+/* ========================================= */
+/* OPTIMIZACIÓN EXCLUSIVA PARA TELÉFONOS */
+/* ========================================= */
+
+@media (max-width: 700px) {
+
+    /* ================================= */
+    /* PLANETA */
+    /* ================================= */
+
+    .escenario {
+        padding: 5px 10px 100px;
+    }
+
+    .planeta {
+        width: 94vw;
+        height: 94vw;
+        margin-top: 20px;
+    }
+
+
+    /* ================================= */
+    /* 4 PROBLEMÁTICAS */
+    /* ================================= */
+
+    .problema {
+        width: 58px;
+        height: 58px;
+        z-index: 10;
+    }
+
+    /* Arriba izquierda */
+
+    .sobrepoblacion {
+        top: 16%;
+        left: 10%;
+    }
+
+    /* Abajo izquierda */
+
+    .deforestacion {
+        top: 68%;
+        left: 10%;
+    }
+
+    /* Arriba derecha */
+
+    .biodiversidad {
+        top: 16%;
+        right: 10%;
+    }
+
+    /* Abajo derecha */
+
+    .contaminacion {
+        top: 68%;
+        right: 10%;
+    }
+
+
+    /* Las etiquetas siguen ocultas */
+
+    .etiqueta {
+        display: none;
+    }
+
+
+    /* ================================= */
+    /* SATÉLITE */
+    /* ================================= */
+
+    .satelite {
+        position: absolute;
+
+        top: 30%;
+        right: 5%;
+
+        width: 65px;
+        height: 65px;
+
+        font-size: 34px;
+
+        z-index: 8;
+    }
+
+    .satelite::before {
+        width: 58px;
+        height: 58px;
+    }
+
+    .satelite::after {
+        width: 72px;
+        height: 72px;
+    }
+
+    .indicador-satelite {
+        font-size: 9px;
+        max-width: 150px;
+        text-align: center;
+    }
+
+
+    /* ================================= */
+    /* COMETA */
+    /* ================================= */
+
+    .cometa {
+        position: absolute;
+
+        top: 72%;
+        left: 3%;
+
+        width: 100px;
+        height: 70px;
+
+        z-index: 8;
+
+        transform: scale(.8);
+    }
+
+    .indicador-cometa {
+        font-size: 9px;
+        top: 68px;
+    }
+
+
+    /* ================================= */
+    /* HOLOGRAMA DEL SATÉLITE */
+    /* ================================= */
+
+    .holograma-satelite {
+        position: fixed;
+
+        inset: 0;
+
+        padding: 15px 0;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+
+    .panel-holografico {
+        position: relative;
+
+        top: auto;
+        right: auto;
+
+        width: 90%;
+        max-width: 400px;
+
+        max-height: calc(100vh - 30px);
+
+        margin: 15px auto;
+
+        padding: 20px;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .imagen-holograma {
+        height: 110px;
+    }
+
+    .panel-holografico p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .linea-holografica {
+        display: none;
+    }
+
+
+    /* ================================= */
+    /* INFORMACIÓN DEL COMETA */
+    /* ================================= */
+
+    .info-cometa {
+        position: fixed;
+
+        inset: 0;
+
+        padding: 15px 0;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        -webkit-overflow-scrolling: touch;
+        overscroll-behavior: contain;
+    }
+
+    .panel-cometa {
+        position: relative;
+
+        top: auto;
+        left: auto;
+
+        width: 90%;
+        max-width: 400px;
+
+        max-height: calc(100vh - 30px);
+
+        margin: 15px auto;
+
+        padding: 20px;
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .imagen-cometa {
+        height: 100px;
+    }
+
+    .panel-cometa p {
+        font-size: 14px;
+        line-height: 1.6;
+    }
+
+    .linea-cometa {
+        display: none;
+    }
+
+}
+
+
+/* ========================================= */
+/* TELÉFONOS PEQUEÑOS */
+/* ========================================= */
+
+@media (max-width: 400px) {
+
+    .problema {
+        width: 52px;
+        height: 52px;
+    }
+
+    .sobrepoblacion {
+        top: 17%;
+        left: 8%;
+    }
+
+    .deforestacion {
+        top: 67%;
+        left: 8%;
+    }
+
+    .biodiversidad {
+        top: 17%;
+        right: 8%;
+    }
+
+    .contaminacion {
+        top: 67%;
+        right: 8%;
+    }
+
+    .panel-holografico,
+    .panel-cometa {
+        width: 92%;
+        max-height: calc(100vh - 20px);
+        margin: 10px auto;
+        padding: 17px;
+    }
+
+}
+
 
 
     </style>
