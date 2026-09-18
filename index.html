@@ -2066,6 +2066,80 @@
 
 }
 
+        /* AJUSTES EXCLUSIVOS PARA TELÉFONO */
+@media (max-width: 700px) {
+
+    /* Hacer que los cuatro iconos queden dentro de la Tierra */
+    .sobrepoblacion {
+        top: 20%;
+        left: 19%;
+    }
+
+    .deforestacion {
+        top: 62%;
+        left: 19%;
+    }
+
+    .biodiversidad {
+        top: 20%;
+        right: 19%;
+    }
+
+    .contaminacion {
+        top: 62%;
+        right: 19%;
+    }
+
+    /* Evitar que los iconos queden debajo de la Tierra */
+    .problema {
+        z-index: 15;
+    }
+
+    /* Mover el satélite más hacia la derecha */
+    .satelite {
+        position: absolute;
+        top: 28%;
+        right: 0;
+        z-index: 18;
+    }
+
+    /* Mantener el cometa separado de los iconos */
+    .cometa {
+        position: absolute;
+        top: 74%;
+        left: 0;
+        z-index: 8;
+    }
+}
+
+@media (max-width: 400px) {
+
+    /* Ajuste adicional para celulares pequeños */
+    .sobrepoblacion {
+        top: 21%;
+        left: 17%;
+    }
+
+    .deforestacion {
+        top: 61%;
+        left: 17%;
+    }
+
+    .biodiversidad {
+        top: 21%;
+        right: 17%;
+    }
+
+    .contaminacion {
+        top: 61%;
+        right: 17%;
+    }
+
+    .satelite {
+        top: 27%;
+        right: -2px;
+    }
+}
 
 
     </style>
