@@ -2145,6 +2145,50 @@
 
 }
 
+        @media (max-width: 700px) {
+
+    /* Ventana del cometa en teléfono */
+    .info-cometa {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
+        overflow-x: hidden;
+        padding: 20px 0;
+        box-sizing: border-box;
+    }
+
+    .panel-cometa {
+        position: relative;
+        top: auto;
+        left: auto;
+        transform: none;
+
+        width: 88%;
+        max-width: 400px;
+
+        /* IMPORTANTE: deja espacio para poder leer todo */
+        max-height: none;
+        min-height: 0;
+
+        margin: 20px auto 40px;
+        padding: 20px;
+        box-sizing: border-box;
+
+        overflow: visible;
+    }
+
+    .imagen-cometa {
+        height: 110px;
+    }
+
+    .panel-cometa p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+}
+
 
     </style>
 </head>
